@@ -1,13 +1,16 @@
 const koa = new (require('koa'))()
 const router = require('koa-router')()
 const bodyparser = require('koa-bodyparser')
-const templ = require('./routes/template.js')
+const templRoutes = require('./routes/template.js')
+const userRoutes = require('./routes/user.js')
 
 koa.use(bodyparser())
 koa.on('error', function(err, ctx) {
     console.log('server error: ', err);
 });
-router.use(templ.routes())
+
+router.use(templRoutes.routes())
+router.use(userRoutes.routes())
 
 koa.use(router.routes())
 

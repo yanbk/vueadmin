@@ -7,9 +7,10 @@ const {
 } = require('../utils/template')
 
 const previewTemplate = function(ctx) {
+    // console.log(ctx.request.body)
     ctx.body = {
         code: 100,
-        data: vueTemplate(ctx.request.body.name)
+        data: vueTemplate(ctx.request.body)
     }
 }
 const setTemplate = async function (ctx) {
@@ -44,7 +45,7 @@ const setTemplate = async function (ctx) {
             componentName = inputName
         }
         console.log(`正在生成 vue 文件 ${vueFile}`)
-        await generateFile(vueFile, vueTemplate(componentName))
+        await generateFile(vueFile, vueTemplate(ctx.request.body.data))
         console.log(`正在生成 entry 文件 ${entryFile}`)
         await generateFile(entryFile, entryTemplate(componentName))
         console.log('生成成功')
@@ -93,7 +94,6 @@ function mkdirs(directory, callback) {
         })
     }
 }
-
 
 module.exports = {
     setTemplate,

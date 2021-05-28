@@ -10,6 +10,7 @@
 <script>
 import { useStore } from 'vuex'
 import { setTemplate, previewTemplate } from '@/api/template'
+import { getUsers } from '@/api/user'
 import marked from "marked"
 import hljs from "highlight.js";
 import 'highlight.js/styles/atelier-plateau-light.css';
@@ -22,6 +23,9 @@ export default {
   },
   mounted() {
     console.log(useStore().state.user)
+    getUsers().then(res => {
+      console.log(res)
+    })
   },
   methods: {
     previewTemplate() {

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <h1>{{ $kkbrouter }}</h1>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
