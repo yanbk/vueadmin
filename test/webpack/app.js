@@ -7,13 +7,13 @@ const babel = require("@babel/core");
 function getModuleInfo(file) {
     // 读取文件
     const body = fs.readFileSync(file, "utf-8");
-    console.log('body:', body)
+    console.log('body:11111', body)
 
-    // 转化AST语法树
+    // 转化AST语法树(抽象语法树)
     const ast = parser.parse(body, {
         sourceType: "module", //表示我们要解析的是ES模块
     });
-    console.log('ast:', ast)
+    // console.log('ast:222222', ast)
     // 依赖收集
     const deps = {};
     traverse(ast, {
@@ -23,12 +23,16 @@ function getModuleInfo(file) {
             deps[node.source.value] = abspath;
         },
     });
+    // console.log('ast:33333', ast)
 
     // ES6转成ES5
     const { code } = babel.transformFromAst(ast, null, {
         presets: ["@babel/preset-env"],
     });
+
+    console.log('ast:44444', code)
     const moduleInfo = { file, deps, code };
+    console.log('ast:5555', moduleInfo)
     return moduleInfo;
 }
 
@@ -45,6 +49,7 @@ function parseModules(file) {
             code: moduleInfo.code,
         };
     });
+    console.log(depsGraph)
     return depsGraph;
 }
 
@@ -78,7 +83,8 @@ function bundle(file) {
 }
 
 const info = bundle("./src/index.js");
-console.log("info:", info);
+// console.log("info:", info);
 !fs.existsSync("./dist") && fs.mkdirSync("./dist");
 fs.writeFileSync("./dist/bundle.js", info);
 
+console.log(exports)

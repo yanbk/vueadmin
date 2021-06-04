@@ -189,3 +189,36 @@ function bundle(file) {
 fs.writeFileSync("./dist/bundle.js", content);
 
 ```
+上面代码depsGraph的结果为：
+```
+{
+  './src/index.js': {
+    deps: { './add.js': './src\\add.js', './del.js': './src\\del.js' },
+    code: '"use strict";\n' +
+      '\n' +
+      'var _add = _interopRequireDefault(require("./add.js"));\n' +
+      '\n' +
+      'var _del = _interopRequireDefault(require("./del.js"));\n' +
+      '\n' +
+      'function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }\n' +
+      '\n' +
+      'console.log((0, _add["default"])(1, 2));'
+  },
+  './src\\add.js': {
+    deps: {},
+    code: '"use strict";\n' +
+      '\n' +
+      'Object.defineProperty(exports, "__esModule", {\n' +
+      '  value: true\n' +
+      '});\n' +
+      'exports["default"] = void 0;\n' +
+      '\n' +
+      'var _default = function _default(a, b) {\n' +
+      '  return a + b;\n' +
+      '};\n' +
+      '\n' +
+      'exports["default"] = _default;'
+  },
+  './src\\del.js': { deps: {}, code: '"use strict";\n\nconsole.log(1111);' }
+}
+```
