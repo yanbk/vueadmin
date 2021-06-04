@@ -1,0 +1,18 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "```\r // index.js\r var add = require('add.js').default\r console.log(add(1 , 2))",
+  "main": "app.js",
+  "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/parser": "^7.14.4",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/traverse": "^7.14.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
